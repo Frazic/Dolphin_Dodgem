@@ -23,6 +23,11 @@ class Dolphin {
         pop();
     }
 
+    resizeImages() {
+        this.image.resize(this.size, this.size);
+        this.bubble.resize(this.size * 1.5, this.size * 1.5);
+    }
+
     moveUp() {
         this.position.y -= this.speed_y;
     }

@@ -1,12 +1,13 @@
-const canvasWidth = 400;
-const canvasHeight = 400;
 const invulnerabilityMillis = 2000;
 const maxObstacleCount = 10;
-const dolphinSize = 40;
 
+let sizeMod;
+let dolphinSize;
+let canvasWidth;
+let canvasHeight;
 let dolphin;
 let obstacles = [];
-let gameSpeed = 2.5;
+let gameSpeed;
 let score = 0;
 let lives = 3;
 let isColliding = false;
@@ -15,10 +16,15 @@ let isInvulnerable = false;
 
 // TODO
 // Everything depends on window size
-// Graphics
 // Sonar
 
 function preload(){
+  canvasWidth = windowWidth;
+  canvasHeight = windowHeight;
+
+  // sizeMod = (canvasWidth + canvasHeight) / 2;
+  sizeMod = min(canvasWidth, canvasHeight);
+
   dolphinImage = loadImage("img/dolphin_logo.png");
   bubbleImage = loadImage("img/bubble.png");
 
@@ -28,38 +34,41 @@ function preload(){
   creatures = [];
 
   let minSize = 0.05;
-  let maxSize = 0.15
+  let maxSize = 0.15;
 
   for (let index = 1; index < 5; index++) {
     seaweeds.push([
       loadImage("img/obstacles/seaweed" + index + ".png"),
-      int(random(canvasWidth * minSize, canvasWidth * maxSize))]);
+      int(random(sizeMod * minSize, sizeMod * maxSize))]);
   }
 
   for (let index = 1; index < 6; index++) {
     stones.push([
       loadImage("img/obstacles/stone" + index + ".png"),
-      int(random(canvasWidth * minSize, canvasWidth * maxSize))]);
+      int(random(sizeMod * minSize, sizeMod * maxSize))]);
   }
 
   creatures.push([
     loadImage("img/obstacles/diver1.png"),
-    int(random(canvasWidth * minSize, canvasWidth * maxSize))]);
+    int(random(sizeMod * minSize, sizeMod * maxSize))]);
   creatures.push([
     loadImage("img/obstacles/murloc1.png"),
-    int(random(canvasWidth * minSize, canvasWidth * maxSize))]);
+    int(random(sizeMod * minSize, sizeMod * maxSize))]);
   creatures.push([
     loadImage("img/obstacles/orca1.png"),
-    int(random(canvasWidth * minSize, canvasWidth * maxSize))]);
+    int(random(sizeMod * minSize, sizeMod * maxSize))]);
   creatures.push([
     loadImage("img/obstacles/shark1.png"),
-    int(random(canvasWidth * minSize, canvasWidth * maxSize))]);
+    int(random(sizeMod * minSize, sizeMod * maxSize))]);
 }
 
 function setup() {
+  gameSpeed = canvasWidth * 0.005;
+
   createCanvas(canvasWidth, canvasHeight);
 
-  dolphin = new Dolphin(50, canvasHeight / 2, 5, 5, dolphinSize);
+  dolphinSize = sizeMod * 0.1 ;
+  dolphin = new Dolphin(50, canvasHeight / 2, canvasWidth * 0.01, canvasHeight * 0.01, dolphinSize);
 
   while (obstacles.length < maxObstacleCount) {
     if (obstacles.length == 0) {
@@ -181,11 +190,11 @@ function gameOver() {
     background(72, 126, 176);
 
     push();
-    textSize(50);
+    textSize(int(sizeMod * 0.1));
     fill("white");
     stroke("black");
     strokeWeight(2);
     textAlign(CENTER, CENTER);
-    text("WELL PLAYED!\nScore: " + round(score/10), canvasWidth / 2, canvasWidth / 2);
+    text("WELL PLAYED!\nScore: " + round(score/10), canvasWidth / 2, canvasHeight / 2);
     pop();
 }

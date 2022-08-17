@@ -8,7 +8,6 @@ class Obstacle {
         this.speed = speed;
         this.obstacleTypes = ["seaweed", "stone", "creature"];
         this.obstacleImage = this.determineObstacleImage();
-        // console.log(this.obstacleImage);
     }
 
     display() {
@@ -34,7 +33,6 @@ class Obstacle {
                 obstacleImage = obstacle[0];
                 obstacleSize = obstacle[1];
                 obstacleImage.resize(obstacleSize, obstacleSize * 2);
-                // obstacleImage.resize(this.width, this.height);
                 break;
             case "stone":
                 obstacle = random(stones);
