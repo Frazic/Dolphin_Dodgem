@@ -1,6 +1,6 @@
 const invulnerabilityMillis = 2000;
-const maxObstacleCount = 10;
 
+let maxObstacleCount = 10;
 let sizeMod;
 let dolphinSize;
 let canvasWidth;
@@ -115,6 +115,11 @@ function draw() {
   if (score % 250 == 0) {
     gameSpeed = parseFloat((gameSpeed + 0.05).toFixed(2));
   }
+  if (score % 1000 == 0) {
+    obstacles.push(generateNewNonCollidingObstacle(obstacles));
+    maxObstacleCount += 1;
+  }
+
   push();
   textSize(20);
   fill("white");
