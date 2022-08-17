@@ -11,12 +11,8 @@ let gameSpeed;
 let score = 0;
 let lives = 3;
 let isColliding = false;
-let invulnerabilityStart
+let invulnerabilityStart;
 let isInvulnerable = false;
-
-// TODO
-// Everything depends on window size
-// Sonar
 
 function preload(){
   canvasWidth = windowWidth;

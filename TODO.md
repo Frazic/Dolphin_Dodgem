@@ -13,3 +13,9 @@
 6. Sound
 
 7. Animations
+
+8. Eat fish for more points
+
+9. Stag final boss
+
+10. Gravity
